@@ -13,7 +13,7 @@ function addBookToLibrary() {
 }
 
 function insertBook(title, author) {
-  const table = document.getElementById("library");
+  const table = document.getElementById("libraryTable");
   const line = document.createElement("tr");
   const titleCell = document.createElement("td");
   const authorCell = document.createElement("td");
@@ -21,4 +21,12 @@ function insertBook(title, author) {
   authorCell.innerText = author;
   line.innerHTML += titleCell;
   line.innerHTML += authorCell;
+  table.innerHTML += line;
 }
+
+function init() {
+  const table = document.getElementById("libraryTable").onsubmit(() => false);
+  const submit = document.getElementById("submit").onclick(addBookToLibrary());
+}
+
+init();
