@@ -6,3 +6,13 @@
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   list-style: none;
 }
+
+body {
+  background: linear-gradient(45deg, transparent, rgb(255, 202, 29), rgb(29, 255, 199)) ;
+}
+
+#addBookForm {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}

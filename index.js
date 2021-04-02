@@ -6,8 +6,8 @@ function Book(title, author) {
 }
 
 function addBookToLibrary() {
-  title = "hello";
-  author = "hi";
+  let title = document.getElementById("titleInsert").innerText;
+  let author = document.getElementById("authorInsert").innerText;
   let book = new Book(title, author);
   myLibrary.push(book);
 }
