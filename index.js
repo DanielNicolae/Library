@@ -6,27 +6,45 @@ function Book(title, author) {
 }
 
 function addBookToLibrary() {
-  let title = document.getElementById("titleInsert").innerText;
-  let author = document.getElementById("authorInsert").innerText;
+  let title = "";
+  if (document.getElementById("titleInsert").value) {
+    title = document.getElementById("titleInsert").value;
+  } else {
+    title = "-";
+  }
+  let author = "";
+  if (document.getElementById("authorInsert").value) {
+    author = document.getElementById("authorInsert").value;
+  } else {
+    author = "-";
+  }
   let book = new Book(title, author);
   myLibrary.push(book);
+  insertBook(title, author);
+  document.getElementById("titleInsert").value = "";
+  document.getElementById("authorInsert").value = "";
 }
 
-function insertBook(title, author) {
-  const table = document.getElementById("libraryTable");
-  const line = document.createElement("tr");
-  const titleCell = document.createElement("td");
-  const authorCell = document.createElement("td");
+function insertBook(title = "-", author = "-") {
+  let table = document.getElementById("tbody");
+  let line = document.createElement("tr");
+  let titleCell = document.createElement("td");
+  let authorCell = document.createElement("td");
   titleCell.innerText = title;
   authorCell.innerText = author;
-  line.innerHTML += titleCell;
-  line.innerHTML += authorCell;
-  table.innerHTML += line;
+  line.appendChild(titleCell);
+  line.appendChild(authorCell);
+  table.appendChild(line);
 }
 
 function init() {
-  const table = document.getElementById("libraryTable").onsubmit(() => false);
-  const submit = document.getElementById("submit").onclick(addBookToLibrary());
+  document.getElementById("submit").addEventListener("click", function (event) {
+    event.preventDefault();
+    addBookToLibrary();
+  });
+  myLibrary.forEach(book => {
+    insertBook(book.title, book.author);
+  });
 }
 
 init();

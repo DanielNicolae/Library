@@ -11,7 +11,7 @@
 
 <body>
   <main>
-    <form onsubmit id="addBookForm">
+    <form id="addBookForm">
       <label for="title">Title</label>
       <input id="titleInsert" type="text" name="title" />
       <label for="author">Author</label>
@@ -19,10 +19,12 @@
       <input id="submit" type="submit" value="Submit" />
     </form>
     <table id="libraryTable">
-      <tr>
-        <th>Title</th>
-        <th>Author</th>
-      </tr>
+      <tbody id="tbody">
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+        </tr>
+      </tbody>
     </table>
   </main>
 </body>
