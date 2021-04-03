@@ -8,7 +8,7 @@
 }
 
 body {
-  height: 100vh;
+  height: 100%;
   background: linear-gradient(45deg, rgb(255, 202, 29), rgb(29, 255, 199));
 }
 
@@ -25,7 +25,21 @@ body {
 
 #submit {
   width: 100px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
+
+#submit:hover {
+  background: rgb(255, 158, 31);
+  box-shadow: 2px 2px 2px rgb(62, 255, 181);
+}
+
+#submit:active {
+  box-shadow: none;
+  background: rgb(177, 177, 177);
+}
+
+
 
 #libraryTable {
   border-collapse: collapse;
