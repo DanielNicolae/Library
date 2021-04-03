@@ -20,6 +20,9 @@ function addBookToLibrary() {
   }
   let book = new Book(title, author);
   myLibrary.push(book);
+  // local storage
+  window.localStorage.setItem("library", JSON.stringify(myLibrary));
+
   insertBook(title, author);
   document.getElementById("titleInsert").value = "";
   document.getElementById("authorInsert").value = "";
@@ -42,9 +45,15 @@ function init() {
     event.preventDefault();
     addBookToLibrary();
   });
-  myLibrary.forEach(book => {
-    insertBook(book.title, book.author);
-  });
+  const localStorage = window.localStorage.getItem("library");
+  const parseLocalStorage = JSON.parse(localStorage);
+  console.log(localStorage)
+  console.log(myLibrary)
+  if (localStorage) {
+    parseLocalStorage.forEach(book => {
+      insertBook(book.title, book.author);
+    });
+  }
 }
 
 init();
