@@ -28,6 +28,12 @@ function addBookToLibrary() {
   document.getElementById("authorInsert").value = "";
 }
 
+// Variable for the id of the delete button
+let i = 0;
+
+const tableBody = document.querySelector("#tbody");
+tableBody.addEventListener("click", pressDelete);
+
 function insertBook(title = "-", author = "-") {
   let table = document.getElementById("tbody");
   let line = document.createElement("tr");
@@ -38,14 +44,20 @@ function insertBook(title = "-", author = "-") {
   line.appendChild(titleCell);
   line.appendChild(authorCell);
   const deleteButton = document.createElement("button");
-  deleteButton.className = "delete";
+  deleteButton.classList.add("delete");
+  deleteButton.id = `${i++}`;
   deleteButton.innerText = "X";
+  deleteButton.addEventListener("click", removeBook);
   line.appendChild(deleteButton);
   table.appendChild(line);
 }
 
-function removeBook(book) {
-  const i = myLibrary.indexOf(book);
+function pressDelete(e) {
+  return e.target.id;
+}
+
+function removeBook(e) {
+  const i = pressDelete(e);
   myLibrary.splice(i, 1);
 }
 
