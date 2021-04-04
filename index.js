@@ -53,12 +53,16 @@ function insertBook(title = "-", author = "-") {
 }
 
 function pressDelete(e) {
+  const book = e.target.parentElement;
+  book.remove();
   return e.target.id;
 }
 
 function removeBook(e) {
   const i = pressDelete(e);
   myLibrary.splice(i, 1);
+  // reset local storage
+  window.localStorage.setItem("library", JSON.stringify(myLibrary));
 }
 
 function init() {
