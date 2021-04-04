@@ -54,7 +54,10 @@ function insertBook(title = "-", author = "-") {
 
 function pressDelete(e) {
   const book = e.target.parentElement;
-  book.remove();
+  book.classList.add("fall");
+  book.addEventListener("animationend", function () {
+    book.remove();
+  });
   return e.target.id;
 }
 
