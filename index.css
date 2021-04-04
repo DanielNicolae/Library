@@ -12,7 +12,7 @@ main {
   height: 100vh;
   background: linear-gradient(45deg, rgb(69, 150, 255),rgb(255, 209, 60));
   animation: bgColor 10s infinite alternate;
-  background-size: 500%;
+  background-size: 400%;
 }
 
 @keyframes bgColor {
@@ -47,7 +47,8 @@ main {
   box-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
 
-#submit:hover, #submit:focus {
+#submit:hover, 
+#submit:focus {
   background: rgb(255, 158, 31);
   box-shadow: 2px 2px 2px rgb(62, 255, 181);
 }
@@ -57,8 +58,6 @@ main {
   background: rgb(177, 177, 177);
 }
 
-
-
 #libraryTable {
   border-collapse: collapse;
   margin-left: 20px;
@@ -67,4 +66,18 @@ main {
 #libraryTable, #libraryTable th, #libraryTable td {
   border: 1px solid rgb(0, 0, 0);
   padding: 5px;
+}
+
+#tbody .delete {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 2px;
+  box-shadow: inset -1px -1px 2px rgb(0, 0, 0);
+  background: rgb(221, 221, 221);
+  color: rgb(255, 24, 24);
+}
+
+#tbody .delete:hover, 
+#tbody .delete:focus {
+  background: rgb(52, 140, 255);
 }

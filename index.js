@@ -37,7 +37,16 @@ function insertBook(title = "-", author = "-") {
   authorCell.innerText = author;
   line.appendChild(titleCell);
   line.appendChild(authorCell);
+  const deleteButton = document.createElement("button");
+  deleteButton.className = "delete";
+  deleteButton.innerText = "X";
+  line.appendChild(deleteButton);
   table.appendChild(line);
+}
+
+function removeBook(book) {
+  const i = myLibrary.indexOf(book);
+  myLibrary.splice(i, 1);
 }
 
 function init() {
@@ -47,10 +56,9 @@ function init() {
   });
   const localStorage = window.localStorage.getItem("library");
   const parseLocalStorage = JSON.parse(localStorage);
-  console.log(localStorage)
-  console.log(myLibrary)
   if (localStorage) {
     parseLocalStorage.forEach(book => {
+      myLibrary.push(book);
       insertBook(book.title, book.author);
     });
   }
