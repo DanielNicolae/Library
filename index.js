@@ -1,8 +1,9 @@
 let myLibrary = [];
 
-function Book(title, author) {
+function Book(title, author, read) {
   this.title = title;
   this.author = author;
+  this.read = read;
 }
 
 function addBookToLibrary() {
@@ -18,7 +19,8 @@ function addBookToLibrary() {
   } else {
     author = "-";
   }
-  let book = new Book(title, author);
+  let read = false;
+  let book = new Book(title, author, read);
   myLibrary.push(book);
   // local storage
   window.localStorage.setItem("library", JSON.stringify(myLibrary));
@@ -42,14 +44,26 @@ function insertBook(title = "-", author = "-") {
   titleCell.innerText = title;
   authorCell.innerText = author;
   line.appendChild(titleCell);
-  line.appendChild(authorCell);
+
+  const readButton = document.createElement("button");
+  readButton.innerText = "Read";
+  readButton.classList.add("notRead");
+  readButton.addEventListener("click", readBook);
+
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete");
   deleteButton.id = `${i++}`;
   deleteButton.innerText = "X";
   deleteButton.addEventListener("click", removeBook);
+
   line.appendChild(deleteButton);
   table.appendChild(line);
+}
+
+function readBook(e) {
+  const book = e.target.parentElement;
+  book.classList.add("read");
+  return e.target.id;
 }
 
 function pressDelete(e) {
