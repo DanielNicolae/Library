@@ -62,8 +62,13 @@ function insertBook(title = "-", author = "-") {
 
 function readBook(e) {
   const book = e.target.parentElement;
-  book.classList.add("read");
-  return e.target.id;
+  if (!e.target.read) {
+    e.target.read = !e.target.read;
+    book.classList.add("read");
+  } else {
+    e.target.read = e.target.read;
+    book.classList.remove("read");
+  }
 }
 
 function pressDelete(e) {
