@@ -7,7 +7,7 @@
   list-style: none;
 }
 
-main {
+body {
   height: 100vh;
   background: linear-gradient(45deg, rgb(69, 150, 255),rgb(255, 209, 60));
   animation: bgColor 10s infinite alternate;
