@@ -64,7 +64,7 @@ main {
 
 #libraryTable, #libraryTable th, #libraryTable td {
   border: 1px solid rgb(0, 0, 0);
-  padding: 5px;
+  padding: 10px;
 }
 
 #tbody .delete {
@@ -74,11 +74,34 @@ main {
   box-shadow: inset -1px -1px 2px rgb(0, 0, 0);
   background: rgb(221, 221, 221);
   color: rgb(255, 24, 24);
+  border-radius: 3px;
 }
 
 #tbody .delete:hover, 
 #tbody .delete:focus {
   background: rgb(52, 140, 255);
+}
+
+#tbody .read {
+  background: rgb(127, 255, 0);
+}
+
+#tbody .readButton {
+  font-size: 1em;
+  padding: 5px;  
+  transform: translateY(-10%);
+  color: rgb(0, 0, 0);
+  border-radius: 3px;
+}
+
+#tbody .notPressedReadButton {
+  box-shadow: inset -1px -1px 2px rgb(0, 0, 0);
+  background: rgb(60, 255, 11);
+}
+
+#tbody .pressedReadButton {
+  background: rgb(197, 197, 197);
+  box-shadow: inset 1px 1px 2px rgb(0, 0, 0);
 }
 
 #tbody .fall {

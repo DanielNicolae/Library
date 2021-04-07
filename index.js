@@ -1,12 +1,16 @@
 let myLibrary = [];
 
-function Book(title, author, read) {
+function Book(id, title, author, read) {
+  this.id = id;
   this.title = title;
   this.author = author;
   this.read = read;
 }
 
+let bookId = 0;
+
 function addBookToLibrary() {
+  id = bookId++;
   let title = "";
   if (document.getElementById("titleInsert").value) {
     title = document.getElementById("titleInsert").value;
@@ -20,55 +24,69 @@ function addBookToLibrary() {
     author = "-";
   }
   let read = false;
-  let book = new Book(title, author, read);
+  let book = new Book(id, title, author, read);
   myLibrary.push(book);
-  // local storage
-  window.localStorage.setItem("library", JSON.stringify(myLibrary));
+  resetLocalStorage();
 
   insertBook(title, author);
   document.getElementById("titleInsert").value = "";
   document.getElementById("authorInsert").value = "";
 }
 
-// Variable for the id of the delete button
-let i = 0;
-
-const tableBody = document.querySelector("#tbody");
-tableBody.addEventListener("click", pressDelete);
 
 function insertBook(title = "-", author = "-") {
   let table = document.getElementById("tbody");
   let line = document.createElement("tr");
   let titleCell = document.createElement("td");
   let authorCell = document.createElement("td");
+  line.id = `${bookId}`;
   titleCell.innerText = title;
   authorCell.innerText = author;
-  line.appendChild(titleCell);
 
   const readButton = document.createElement("button");
   readButton.innerText = "Read";
-  readButton.classList.add("notRead");
-  readButton.addEventListener("click", readBook);
+  readButton.classList.add("readButton");
+  readButton.classList.add("notPressedReadButton");
+  readButton.addEventListener("click", setReadBook);
 
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete");
-  deleteButton.id = `${i++}`;
   deleteButton.innerText = "X";
   deleteButton.addEventListener("click", removeBook);
 
+  line.appendChild(readButton);
+  line.appendChild(titleCell);
+  line.appendChild(authorCell);
   line.appendChild(deleteButton);
   table.appendChild(line);
 }
 
+function resetLocalStorage() {
+  window.localStorage.setItem("library", JSON.stringify(myLibrary));
+}
+
 function readBook(e) {
   const book = e.target.parentElement;
-  if (!e.target.read) {
-    e.target.read = !e.target.read;
+  if (!book.read) {
+    book.read = true;
+    resetLocalStorage();
     book.classList.add("read");
+    e.target.classList.add("pressedReadButton");
+    e.target.classList.remove("notPressedReadButton");
   } else {
-    e.target.read = e.target.read;
+    book.read = false;
+    resetLocalStorage();
     book.classList.remove("read");
+    e.target.classList.remove("pressedReadButton");
+    e.target.classList.add("notPressedReadButton");
   }
+  return book.id;
+}
+
+function setReadBook(e) {
+  const id = readBook(e);
+  myLibrary[id].read = !myLibrary[id].read;
+  resetLocalStorage();
 }
 
 function pressDelete(e) {
@@ -77,14 +95,14 @@ function pressDelete(e) {
   book.addEventListener("animationend", function () {
     book.remove();
   });
-  return e.target.id;
+  console.log(book.id);
+  return book.id;
 }
 
 function removeBook(e) {
   const i = pressDelete(e);
   myLibrary.splice(i, 1);
-  // reset local storage
-  window.localStorage.setItem("library", JSON.stringify(myLibrary));
+  resetLocalStorage();
 }
 
 function init() {
